@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create</title>
+</head>
+<body>
+<div style="border: 1px solid red">
+    <h1>Thêm mới ghi chú</h1>
+<p>
+    <a href="/notes">Danh sách Note</a>
+</p>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+    <form th:action="@{/create-note}" th:object="${note}" method="post">
+        <table>
+            <tr>
+                <td>Tiêu đề:</td>
+                <td><input type="text" th:field="*{title}"/></td>
+            </tr>
+            <tr>
+                <td>Nội dung:</td>
+                <td><input type="text" th:field="*{content}"/></td>
+            </tr>
+            <tr>
+                <td>NoteType:</td>
+                <td>
+                    <select th:field="*{noteType}">
+                        <option th:each="n : ${noteTypes}" th:value="${n.id}" th:text="${n.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Lưu"></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
